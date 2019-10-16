@@ -22,9 +22,9 @@
 ### Go Patch ###
 /vendor/
 /Godeps/
-/src/github.com
-/bin/
-/pkg/
+/Users/jane/dev/go/src/github.com/
+/Users/jane/dev/go/bin/
+/Users/jane/dev/go/pkg/
 
 ### macOS ###
 # General
