@@ -173,5 +173,166 @@ vet         report likely mistakes in packages
 - 변수 선언 및 사용법: `var`
 - 상수 선언 및 사용법: `const`
 
-ㄴ
+## 변수
+
+### 변수 선언 (variable1.go)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 변수는 기본 초기화 과정 필요
+	// 정수 타입: 0, 실수(소수점): 0.0, 문자열: "", Boolean: true, false
+
+	// var a int32     // 선언만 하고 초기화 안하면 에러 발생
+	// var b string
+	// var c, d, e int32
+	// var f, g, h int32 = 1, 2, 3
+	// var i float32 = 11.4
+	// var j string = "Hi, Golang!"
+	// var m = true
+
+	var k = 4.75
+
+	fmt.Println("k: ", k)
+
+}
+```
+
+
+
+### 변수 여러 개 선언 (variable2.go)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 여러 개 선언: 가독성이 좋아짐
+	var (
+		name      string = "machine"
+		height    int32
+		weight    float32
+		isRunning bool
+	)
+
+	height = 250
+	weight = 350.56
+	isRunning = true
+
+	fmt.Println("name: ", name, "height : ", height, "weight : ", weight, "isRunning : ", isRunning)
+}
+```
+
+
+
+### 짧은 선언 (variable3.go)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 짧은 선언(Go에만 있음)
+	// 반드시 함수 안에서만 사용(전역으로는 사용 불가)
+	// 선언 후 재할당 하면 에러 발생
+	// 특정 메서드 안에 1회성으로 사용하는 것
+	// 주로 제한된 범위의 함수 내에서 사용할 경우 코드 가독성을 높일 수 있다.
+
+	shortVar1 := 3
+	shortVar2 := "Test"
+	shortVar3 := false
+
+	// shortVar1 := 10 // 에러 발생
+
+	fmt.Println("shortVar1: ", shortVar1, "shortVar2: ", shortVar2, "shortVar3: ", shortVar3)
+  
+  // Example
+	if i := 10; i < 11 {
+		fmt.Println("short Variable Test Success!")
+	}
+}
+```
+
+
+
+- 재할당 하면 아래와 같이 에러 발생
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	shortVar1 := 3
+	shortVar1 := 10
+
+	fmt.Println("shortVar1: ", shortVar1)
+}
+
+/*
+-----------------------ERROR MESSAGE-----------------------------------
+# command-line-arguments
+./variable3.go:7:12: no new variables on left side of :=
+*/
+```
+
+
+
+## 상수
+
+### 상수 선언 (const1.go)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	/*
+		- 상수
+			const 사용 초기화, 한번 선언 후 값 변경 금지, 고정된 값 관리용
+	*/
+
+	const a string = "Test1" // 선언과 동시에 초기화 해야 함
+	const b = "Test2"
+	const c int32 = 10 * 10
+
+	/* const d = getHeight()
+	에러 발생. getHeight()가 항상 같은 값을 받는다는 보장이 없으므로 */
+
+	const e = 35.6
+	const f = false 
+
+	fmt.Println("a: ", a, "b: ", b, "c: ", c, "e: ", e, "f: ", f)
+
+}
+```
+
+
+
+### 상수 여러게 선언 (const2.go)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const a, b int = 10, 90
+	const c, d, e = true, 0.84, "test"
+	const (
+		x, y int16 = 50, 90
+		i, k       = "Data", 7776
+	)
+
+	fmt.Println(a, b, c, d, e)
+	fmt.Println(x, y, i, k)
+
+}
+```
 
