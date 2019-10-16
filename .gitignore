@@ -22,6 +22,9 @@
 ### Go Patch ###
 /vendor/
 /Godeps/
+/src/github.com
+/bin/
+/pkg/
 
 ### macOS ###
 # General
