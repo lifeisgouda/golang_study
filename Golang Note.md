@@ -315,7 +315,7 @@ func main() {
 
 
 
-### 상수 여러게 선언 (const2.go)
+### 상수 여러개 선언 (const2.go)
 
 ```go
 package main
@@ -335,4 +335,139 @@ func main() {
 
 }
 ```
+
+
+
+# 열거형 Enumeration 🚩
+
+## `Iota`
+
+- java의 `enum class` 같은 것
+
+- 상수를 연속되는 숫자로 나열하거나, 연속되는 규칙에 의해서 계산을 하여 선언 후 비즈니스 로직에서 변수를 계산, 표현 할때 사용
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 열거형
+	// 상수를 사용하는 일정한 규칙에 따라 숫자를 계산 및 증가 시키는 묶음
+	const (
+		Jan   = 1
+		Feb   = 2
+		March = 3
+		April = 4
+		May   = 5
+		June  = 6
+	)
+
+	fmt.Println(Jan)
+	fmt.Println(Feb)
+	fmt.Println(March)
+	fmt.Println(April)
+	fmt.Println(May)
+	fmt.Println(June)
+}
+```
+
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const (
+		A = iota
+		B
+		C
+	)
+
+	fmt.Println(A, B, C)
+}
+----------
+0, 1, 2
+```
+
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const (
+		A = iota * 10
+		B
+		C
+	)
+
+	fmt.Println(A, B, C)
+}
+-----------
+0, 10, 20
+```
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const (
+		Jan   = iota + 1
+		Feb
+		March
+		April
+		May
+		June 
+	)
+
+	fmt.Println(Jan)
+	fmt.Println(Feb)
+	fmt.Println(March)
+	fmt.Println(April)
+	fmt.Println(May)
+	fmt.Println(June)
+}
+-----------
+1, 2, 3, 4, 5, 6
+```
+
+
+
+## Under bar
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const (
+		_ = iota // 밑줄로 시작하면 0
+		A
+		_ // 생략. skip 처리. 출력안됨. 규칙은 그대로 유지.
+		C
+	)
+
+	const (
+		_ = iota + 0.75*2
+		DEFAULT
+		SILVER
+		_
+		PLATINUM
+	)
+
+	fmt.Println("Default: ", DEFAULT, "Silver: ", SILVER, "Gold: ", GOLD, "PLATINUM: ", PLATINUM)
+}
+-------------------
+./enumeration3.go:21:66: undefined: GOLD
+```
+
+
 
