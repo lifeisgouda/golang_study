@@ -648,3 +648,212 @@ func main() {
 
 ## Switch
 
+- golang만의 switch문 특징 익히는 것 중요
+- `switch` 뒤 `expression` 생략 가능
+- `case` 뒤 `expression` 생략 가능
+- 자동 `break` 때문에 fallthrough 존재
+- 값이 아닌 Type으로 분기 가능
+
+### Example 1
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	a := -7
+	switch {
+	case a < 0:
+		fmt.Println(a, "은/는 음수")
+	case a == 0:
+		fmt.Println(a, "은/는 0")
+	case a > 0:
+		fmt.Println(a, "은/는 양수")
+	}
+}
+```
+
+
+
+### Example 2
+
+-  Golang에서 더 선호하는 스타일
+- clean code: b를 switch 안에서 선언하여 스코프가 생성 되어 b의 범위가 switch 안으로 제한
+- 타 언어에 비하여  `go` 는  `switch` 의 비중 높다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// ex2: Golang에서 더 선호하는 스타일
+	// b의 범위가 switch 안으로 제한 -> clean code
+	switch b := 27; {
+	case b < 0:
+		fmt.Println(a, "은/는 음수")
+	case b == 0:
+		fmt.Println(a, "은/는 0")
+	case b > 0:
+		fmt.Println(a, "은/는 양수")
+	}
+}
+```
+
+
+
+### Example 3
+
+- `case` 뒤 `expression` 생략 가능 문법
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	switch c := "go"; c {		// ; 뒤에 c -> expression 생략 가능
+	case "go":
+		fmt.Println("Go")
+	case "Java":
+		fmt.Println("Java")
+	default:
+		fmt.Println("일치하는 값 없음.")
+	}
+}
+```
+
+
+
+### Example 4
+
+- `c + "lang"` : 연산자로 계산 가능
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	switch c := "go"; c + "lang" {    // 연산자로 계산 가능
+	case "golang":
+		fmt.Println("Go")
+	case "java":
+		fmt.Println("Java")
+	default:
+		fmt.Println("일치하는 값 없음.")
+	}
+}
+```
+
+
+
+### Example 5
+
+- `c + "lang"` : 연산자로 계산 가능
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	switch i, j := 20, 30; {
+	case i < j:
+		fmt.Println("i < j")
+	case i == j:
+		fmt.Println("i == j")
+	case i > j:
+		fmt.Println("i > j")
+	}
+}
+```
+
+
+
+### Example 6
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func main() {
+	// ex1
+	rand.Seed(time.Now().UnixNano())
+	switch i := rand.Intn(100); {
+	case i >= 50 && i < 100:
+		fmt.Println("i -> ", i, " 50이상 100미만")
+	case i >= 25 && i < 50:
+		fmt.Println("i -> ", i, " 25이상 50미만")
+	default:
+		fmt.Println("i -> ", i, " 기본값")
+	}
+}
+```
+
+
+
+### Example 7
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// ex1
+	a := 30 / 15
+	switch a {
+	case 2, 4, 6: // i가 2|4|6 인 경우
+		fmt.Println("a -> ", a, "는 짝수")
+	case 1, 3, 5:
+		fmt.Println("a -> ", a, "는 홀수")
+	}
+}
+```
+
+
+
+### Example 8
+
+- Go는 자동 `break`. 
+- 그렇기 때문에 fallthrough 존재
+- fallthrough: 조건에 맞지 않아도 다음 case 문에 들어가서 실행
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	switch e := "Go"; e {
+	case "Java":
+		fmt.Println("Java")
+		fallthrough
+	case "Go":
+		fmt.Println("Go")
+		fallthrough
+	case "Python":
+		fmt.Println("Python")
+		fallthrough
+	case "Ruby":
+		fmt.Println("Ruby")
+		fallthrough
+	case "C":
+		fmt.Println("C")
+	}
+}
+
+--------------------------------------
+Go
+Python
+Ruby
+C
+```
+
