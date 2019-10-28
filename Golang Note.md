@@ -471,3 +471,180 @@ func main() {
 
 
 
+# Go 제어문 및 반복문
+
+- IF / SWITCH / FOR
+
+
+
+## IF
+
+- 반드시 Boolean으로 명시적으로 정확하게 검사
+- 1, 0 검사 불가. 자동 형변환 없음.
+- 소괄호 사용하지 않음
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 20
+	b := 20
+
+	// ex1
+	if a >= 15 {
+		fmt.Println("over 15")
+	}
+
+	// ex2
+	if b >= 25 {
+		fmt.Println("over 25")
+	}
+}
+```
+
+
+
+### Error Case 1.
+
+- byte code로 만들면서 세미콜론을 끝에 붙인다. 그러므로 괄호 위치 중요. 
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 20
+	b := 20
+  
+	if b >= 25
+	{	// 괄호 위치 때문에 에러 발생
+		fmt.Println("over 25")
+	}
+}
+```
+
+
+
+### Error Case 2.
+
+- 괄호 임의 생략하면 에러 발생
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 20
+	b := 20
+  
+	if b >= 25
+  	fmt.Println("over 25")
+}
+```
+
+
+
+### Error Case 3.
+
+- 0, 1로 검사 불가. Boolean으로만 할 수 있음
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 20
+	b := 20
+  
+  if c :=1; c{
+   fmt.Println("True") 
+  }
+}
+```
+
+
+
+### Error Case 4.
+
+- if문 안에서 c가 사용 후 소멸되므로 if문 밖에서 `c += 20` 하게 되면 에러 발생.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 20
+	b := 20
+  
+  if c :=40; c >= 35 {
+   fmt.Println("over 35") 
+  }
+  
+  c += 20   // 에러 발생
+}
+```
+
+
+
+## IF ... ELSE
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var a int = 50
+	b := 70 // 함수 안에서만 사용할 짧은 선언
+
+	// ex1
+	if a >= 65 {
+		fmt.Println("over 65")
+	} else {
+		fmt.Println("under 65")
+	}
+
+	// ex2
+	if b >= 70 {
+		fmt.Println("over 70")
+	} else {
+		fmt.Println("under 70")
+	}
+}
+```
+
+
+
+## IF ... ELSE IF
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	i := 100
+
+	// if - else if example(1)
+	if i >= 120 {
+		fmt.Println("over 120")
+	} else if i >= 100 && i < 120 {
+		fmt.Println("over 100 under 120")
+	} else if i < 100 && i >= 50 {
+		fmt.Println("over 50 under 100")
+	} else {
+		fmt.Println("under 50")
+	}
+}
+```
+
+
+
+## Switch
+
