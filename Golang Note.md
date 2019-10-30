@@ -857,3 +857,198 @@ Ruby
 C
 ```
 
+
+
+
+
+## for
+
+- Go는 **반복문**이 for문 한개만 있다.
+- Go에서 유일하게 제공되는 반복문
+- 다양한 사용법 숙지
+
+### for example1: for1.go
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	for i := 0; i < 5; i++ {
+		fmt.Println("ex1: ", i)
+	}
+}
+```
+
+
+
+### 에러 발생 case
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// error 1
+	for i := 0; i <5; i++ 
+	{
+		fmt.Println("ex1: ", i)
+	}
+
+	// error 2
+	for i := 0; i < 5; i++
+		fmt.Println("ex1: ", i)
+}
+```
+
+
+
+### Infinite Loop
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	for {
+		fmt.Println("ex2: Hello, Go!")
+		fmt.Println("ex2: Infinite loop!")
+	}
+}
+```
+
+
+
+### Range
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	loc := []string{"Seoul", "Busan", "Incheon"}
+	for index, name := range loc {
+		fmt.Println("ex3 : ", index, name)
+	}
+}
+```
+
+
+
+### for example2: for2.go
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// ex1
+	sum1 := 0
+	for i := 0; i <= 100; i++ {
+		sum1 += i
+	}
+	fmt.Println("ex1: ", sum1)
+
+  // ex2: 가독성 향상
+	sum2, i := 0, 0
+	for i <= 100 {
+		sum2 += i
+		i++
+	}
+	fmt.Println("ex2: ", sum2)
+  
+  // ex3: while문과 유사한 사용법
+  sum3, i := 0, 0
+
+	for {
+		if i > 100 {
+			break
+		}
+		sum3 += i
+		i++
+	}
+	fmt.Println("ex3 : ", sum3)
+  
+  // ex4: 다양한 갯수의 변수 증감연산식 가능
+	for i, j := 0, 0; i <= 10; i, j = i+1, j+10 {
+		fmt.Println("ex4: ", i, j)
+	}
+}
+```
+
+
+
+### error case
+
+- error1: Go에서 증감연산은 반환 값 없음
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// error 1
+	for i <= 100 {
+		sum2 += i
+		j := i++    // Go에서 증감연산은 반환 값 없음
+	}
+	fmt.Println("ex2: ", sum2)
+  
+  // error 2: i++, j += 10
+  for i, j := 0, 0; i <= 10; i, i++, j += 10 {
+	fmt.Println("ex4: ", i, j)
+}
+```
+
+
+
+### for example3 : for3.go
+
+- Loop label
+- continue
+- label을 활용한 continue (자주 쓰이는 패턴은 아님)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// ex1: Loop label
+Loop1:
+	for i := 0; i < 5; i++ {
+		for j := 0; j < 5; j++ {
+			if i == 2 && j == 4 {
+				break Loop1
+			}
+			fmt.Println("ex1: ", i, j)
+		}
+	}
+
+	// ex2: continue
+	for i := 0; i < 10; i++ {
+		if i%2 == 0 {
+			continue
+		}
+		fmt.Println("ex2: ", i)
+	}
+
+	// ex3: label을 활용한 continue
+Loop2:
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if i == 1 && j == 2 {
+				continue Loop2
+			}
+			fmt.Println("ex3: ", i, j)
+		}
+	}
+}
+```
+
