@@ -1,4 +1,4 @@
-# Golang 노트
+# Golang 노트 1. Section1~3
 
 ## Go 설치
 ### 다운로드
