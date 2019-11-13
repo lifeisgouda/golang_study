@@ -1052,3 +1052,101 @@ Loop2:
 }
 ```
 
+
+
+# Go 문법 특징 정리
+
+- 주석
+- 세미콜론
+- 연산(증감, 전치)
+- 코드 자동 서식
+
+## Feature 1
+
+- 모호하거나 애매한 문법 금지
+- 후치(후위) 연산자 허용 (ex) i++
+- 전치(전위) 연산자 비 허용 (ex) ++i
+- 증감 연산은 반환 값 없음. sum := i++ (x)
+- 포인터(Pointer) 허용. 단, 복잡한 연산은 비허용
+- 주석: // , /**/
+
+```go
+// GO 특징 (1) : feature1.go
+package main
+
+import "fmt"
+
+func main() {
+	sum, i := 0, 0
+
+	for i <= 100 {
+		// sum += i++ : 반환값 없고, 예외 발생
+		sum += i
+		i++
+		// ++i: 예외 발생 (전위 증감)
+	}
+	fmt.Println("ex1": sum)
+}
+```
+
+
+
+## Feature 2
+
+- 문장 끝 세미콜론 주의
+- 자동으로 끝에 세미콜론 삽입
+- 두 문장을 한 문장에 표현할 경우 명시적으로 세미콜론 사용(권장하지 않음)
+- 반복문 및 제어문(조건문)(if, for) 사용할 경우에 주의
+
+```go
+// GO 특징 (2) 
+package main
+
+import "fmt"
+
+func main() {
+	// ex 1
+	for i := 0; i <= 10; i++ {
+		// fmt.Print("ex1: ", i); fmt.Println(i) // 두 문장을 한 문장에 표현할 경우 명시적으로 세미콜론 사용(권장하지 않음)
+		fmt.Print("ex1: ", i);
+		fmt.Println("ex1: ", i);
+
+	}
+
+	// ex 2
+	for j := 10; j >= 0; j-- {   // 괄호 위치 중요
+		fmt.Println("ex2 : ", j)
+	}
+}
+```
+
+
+
+## Feature 3
+
+- 코드 서식 지정
+- `fmt` : 한 사람이 코딩한 것 같은 일관성 유지를 도와 줌
+- 코드 스타일 유지
+  - `gofmt -h` : 사용법 설명
+  - `gofmt -w` : 원본 파일에 반영
+
+```go
+// Go 특징 (3)
+package main
+
+import "fmt"
+
+func main() {
+	// 코드 서식 지정: 한 사람이 코딩한 것 같은 일관성 유지
+
+	// ex1
+	for i := 0; i <= 100; i++ {
+		fmt.Println("ex1 :", i)
+	}
+}
+```
+
+```shell
+$ gofmt -w .\feature3.go
+```
+
